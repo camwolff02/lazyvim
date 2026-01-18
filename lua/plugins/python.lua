@@ -48,10 +48,19 @@ return {
       opts.linters_by_ft.python = { "mypy" }
 
       local lint = require("lint")
-      -- Ensure we pick up mypy from the active .venv
-      lint.linters.mypy.cmd = vim.fn.exepath("mypy") or "mypy"
-      -- (optional) quieter output that still shows columns
-      lint.linters.mypy.args = { "--hide-error-context", "--no-pretty", "--no-color-output", "--show-column-numbers" }
+
+      local mypy = vim.fn.exepath("mypy")
+      if mypy == "" then
+        mypy = "mypy"
+      end
+
+      lint.linters.mypy.cmd = mypy
+      lint.linters.mypy.args = {
+        "--hide-error-context",
+        "--no-pretty",
+        "--no-color-output",
+        "--show-column-numbers",
+      }
     end,
   },
 
