@@ -31,10 +31,6 @@ return {
       opts.formatters_by_ft = opts.formatters_by_ft or {}
       -- Run ruff --fix first (organize/simplify), then ruff format
       opts.formatters_by_ft.python = { "ruff_fix", "ruff_format" }
-      -- Prefer external formatter, not LSP formatting
-      opts.format_on_save = vim.tbl_deep_extend("force", opts.format_on_save or {}, {
-        lsp_format = "never",
-      })
       -- Use the ruff from your active venv (venv-selector puts it first in PATH)
     end,
   },
